@@ -1,3 +1,6 @@
 *.zip
 *.nii
 *.nii.gz
+public_data/
+*.ipynb
+inhouse_data/
