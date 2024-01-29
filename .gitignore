@@ -4,3 +4,4 @@
 public_data/
 *.ipynb
 inhouse_data/
+pretrained_cp/
