@@ -3,6 +3,7 @@
 *.nii.gz
 public_data/
 !public_data/Readme.txt
+!public_data/file_works.txt
 *.ipynb
 inhouse_data/
 !inhouse_data/Readme.txt
