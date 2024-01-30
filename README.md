@@ -12,10 +12,10 @@ Target:
 # You can skip steps 1,2,3 if you don't want to train the model
 
 # 0. Installation
-
-`git clone https://github.com/aaekay/iml`
-`bash create_environment.sh`
-
+```bash
+git clone https://github.com/aaekay/iml
+bash create_environment.sh
+```
 Note: It uses anaconda to install the environment
 
 # 1. Download the datasets
@@ -84,7 +84,7 @@ Note: architecure choices are unetr or unet
 
 
 # Acknowlegements
-1. TotalSegmentator - to provide datasets
+Thanks to Vision lab, IIT Delhi, India to provide infrastructure for training.
 
 
 
