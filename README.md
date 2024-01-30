@@ -11,7 +11,7 @@ Target:
 
 # You can skip steps 1,2,3 if you don't want to train the model
 
-# O. Installation
+# 0. Installation
 
 `git clone https://github.com/aaekay/iml`
 `bash create_environment.sh`
@@ -25,9 +25,9 @@ Note: It uses anaconda to install the environment
 | 1 | TotalSegmenatator | 1228 | [Dropbox Link](https://zenodo.org/records/8367088) | 
 | 2 | AAPM              | 48   | Link |
 | 3 | BTCV              | 30   | [Download abodmen.zip](https://www.synapse.org/#!Synapse:syn3553734) |
-| 4 | AbdomenCT-1K Dataset | Three part dataset | [Link](https://ieeexplore.ieee.org/document/9497733)
+| 4 | MICCAI Flare 22 Dataset | 50 | [Link](https://drive.google.com/drive/folders/130DVWqCFALnpHIqnT6aucNIwYygemNjV)
 
-Note: You need to make account at some of the link above to donwload the dataset. Store the dataset in the folder "./public_data/" 
+Note: You need to make account at some of the link above to donwload the dataset. Store the dataset in the folder "./public_data/" folder
 
 # 2. Preparing the public dataset
 Since, the public datasets contain other organs as well. We will remove the other organs from the segmentation file by retaining only 1 for esophagus and 0 for background.
@@ -43,7 +43,7 @@ python preprocess_public_dataset.py
 Training using UNet architecture model
 ```bash
 conda activate iml
-python unet_eso.py
+python train_unet.py
 ```
 Training using swin UNETR architecutre model
 ```bash
@@ -57,7 +57,8 @@ We are offering pre-trained checkpoints of some models listed below on above dat
 
 | Architecture | Size | Link to Download |
 | ------------ | ---- | ---------------- |
-| 
+| unet         |      | Link             |
+| unetr        |      | Link             |
 
 
 # 5. Prepare your own dataset
@@ -68,14 +69,18 @@ Run this script: <br>
 Note: If you have dicom images, see this description to convert your dicom into .nifti
 
 # 6. Now run the model to generate predictions for esophagus
+```bash
+conda activate iml
+python test.py --ckp <path of checkpoint> --arch <unet or unetr> 
+```
+Note: architecure choices are unetr or unet
 
+## Todo:
 
-Todo:
-link add of datasets
-link add of pretrained_cp
-add architecture
-
-see amos data
+- [x] Add MICCAI Flare dataset
+- [ ] add pretrained chekckpoints
+- [ ] add statistics and inference time
+- [ ] add pictures
 
 
 # Acknowlegements
