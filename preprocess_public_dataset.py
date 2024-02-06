@@ -31,6 +31,15 @@ import glob
 from multiprocessing import Pool
 import nibabel as nib
 import json as json
+import numpy as np
+import time
+
+start = time.time()
+# removing the pre-existing filw
+try:
+    os.remove("./public_data/file_works.txt")
+except:
+    print("file is already removed")
 
 # setting directories
 root_dir = "./temp/"
@@ -169,9 +178,10 @@ val_transforms = Compose(
         CropForegroundd(keys=["image", "label"], source_key="image"),
         Orientationd(keys=["image", "label"], axcodes="RAS"),
         Spacingd(keys=["image", "label"], pixdim=(1.5, 1.5, 2.0), mode=("bilinear", "nearest")),
-    ]
+    ])
 
 train_files = data_dicts
+
 for i in train_files:
     new_list =[i]
     try:
@@ -188,3 +198,6 @@ for i in train_files:
         with open("./public_data/not_work.txt", "a" ) as file:
                     file.write(str(i)+ "\n")
 
+end = time.time()
+
+print(f"total time taken is {end - start} seconds")
