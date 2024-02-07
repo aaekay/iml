@@ -34,7 +34,7 @@ import argparse
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--log_file", type=str)
-parser.add_argument("--val", type=int)
+parser.add_argument("--val", type=float) # 0.2 means 20 percent is val set
 parser.add_argument("--epochs", type=int)
 parser.add_argument("--batch", type=int)
 parser.add_argument("--cache", type=float)
@@ -43,7 +43,7 @@ args = parser.parse_args()
 
 root_dir = "./temp/"
 print(root_dir)
-
+os.makedirs(root_dir, exist_ok=True)
 logging.basicConfig(filename=os.path.join(root_dir, args.log_file),
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
@@ -114,14 +114,13 @@ len(data_dicts)
 data_dicts[0]
 
 # splitting up the data_dicts into train and validation
-divider = 1/(args.val)
-n = len(data_dicts) // (args.val*100)
+n = round(args.val*len(data_dicts))
 train_files, val_files = data_dicts[:-n], data_dicts[-n:]
 
 # using cachedataset accelerated training. If you have enough memory you can use cache rate equal to 1.0 to cache all data. If you have lower memory use lower cache rate ~ 0.1
 train_ds = CacheDataset(data=train_files, transform=train_transforms, cache_rate=args.cache, num_workers=4)
 
-val_ds = CacheDataset(data=val_files, transform=val_transforms, cache_rate=0.5, num_workers=4)
+val_ds = CacheDataset(data=val_files, transform=val_transforms, cache_rate=1.0, num_workers=4)
 
 # can increase the batch size by increasing batch size below
 train_loader = DataLoader(train_ds, batch_size=args.batch, shuffle=True, num_workers=4)
